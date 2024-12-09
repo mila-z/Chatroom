@@ -10,13 +10,29 @@
 ## Introduction
 
 
-## Client Server Communication
+## Client Server Communication and Functionality
+
+### Server
+
+#### Libraries Used
+
+#### Constants
+
+#### Functions
+
+### Client
+
+#### Libraries Used
+
+#### Constants
+
+#### Functions
 
 
 ## Architecture
 
 
-## Running the Applpication
+## Running the Application
 
 ### Server
 
