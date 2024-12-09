@@ -24,20 +24,24 @@ def receive_messages():
     while not termination_flag.is_set():
         try:
             while True:
-                username_header = client_socket.recv(HEADER_LENGTH)
+                # username_header = client_socket.recv(HEADER_LENGTH)
+                header = client_socket.recv(HEADER_LENGTH)
                 if not len(username_header):
                     print('Connection closed by the server')
                     termination_flag.set()
                     break
                 
-                username_length = int(username_header.decode('utf-8').strip())
-                username = client_socket.recv(username_length).decode('utf-8')
+                # username_length = int(username_header.decode('utf-8').strip())
+                # username = client_socket.recv(username_length).decode('utf-8')
+# 
+                # message_header = client_socket.recv(HEADER_LENGTH)
+                # message_length = int(message_header.decode('utf-8').strip())
+                # message = client_socket.recv(message_length).decode('utf-8')
 
-                message_header = client_socket.recv(HEADER_LENGTH)
-                message_length = int(message_header.decode('utf-8').strip())
-                message = client_socket.recv(message_length).decode('utf-8')
+                mess_len = int(header.decode('utf-8').strip())
+                mess = client_socket.recv(mess_len).decode('utf-8')
 
-                print(f'{username} > {message}')
+                print(mess)
         except IOError as e:
             if e.errno != errno.EAGAIN and e.errno != errno.EWOULDBLOCK: #when there are no more messages to be received
                 print('Reading error', str(e))
@@ -53,7 +57,7 @@ def receive_messages():
 
 def send_messages():
     while not termination_flag.is_set():
-        message = input(f'{my_username} > ')
+        message = input("")
 
         if message == '!logout':
             print('Logging out...')
