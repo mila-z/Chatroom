@@ -86,9 +86,21 @@ def show_active_users(sender_socket):
     
     for client_socket in clients:
         if client_socket != sender_socket:
-            username_header = clients[client_socket]['header']
-            username = clients[client_socket]['data']
-            sender_socket.send(username_header + username)
+            message = ('->' + clients[client_socket]['data'].decode('utf-8')).encode('utf-8')
+            message_header = generate_header(message)
+            sender_socket.send(message_header + message)
+
+def send_private_message(sender_user, receiver_user, message):
+    receiver_user = receiver_user.encode('utf-8')
+    for client_socket in clients:
+        print(clients[client_socket]['data'])
+        print(receiver_user)
+        if clients[client_socket]['data'] == receiver_user:
+            private_message = f'privately {sender_user} > {message}'
+            private_message_header = generate_header(private_message)
+            private_message = private_message.encode('utf-8')
+            print('fount it now sending')
+            client_socket.send(private_message_header + private_message) 
 
 # broadcast sent message
 def broadcast_message_to_users(sender_socket, message):
@@ -99,6 +111,10 @@ def broadcast_message_to_users(sender_socket, message):
 
     if message_data == '!who':
         show_active_users(sender_socket)
+        return
+    elif message_data.split(' ')[0] == '!msg':
+        _, receiver_user, private_message = message_data.split(' ', 2)
+        send_private_message(username, receiver_user, private_message)
         return
 
     print(f'Received message from {username}: {message_data}')
