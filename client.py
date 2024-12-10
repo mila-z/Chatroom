@@ -36,10 +36,10 @@ def receive_messages():
                     termination_flag.set()
                     break
 
-                mess_len = int(header.decode('utf-8').strip())
-                mess = client_socket.recv(mess_len).decode('utf-8')
+                message_len = int(header.decode('utf-8').strip())
+                message = client_socket.recv(message_len).decode('utf-8')
 
-                print(mess)
+                print(message)
         except IOError as e:
             if e.errno != errno.EAGAIN and e.errno != errno.EWOULDBLOCK: #when there are no more messages to be received
                 print('Reading error', str(e))
