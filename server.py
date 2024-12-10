@@ -16,6 +16,7 @@ print('Server is listening...')
 
 sockets_list = [server_socket]
 
+# key: socket, value: {'header': username header, 'data': username}
 clients = {}
 
 
@@ -46,8 +47,7 @@ def send_message_to_all_except_sender(sender_socket, message):
 
 
 # accepting and handling new connection
-def handle_new_connection(client_socket, client_address):
-    # adding information to the constants
+def handle_new_connection(client_socket, client_address, user):
     sockets_list.append(client_socket)
 
     clients[client_socket] = user
@@ -82,12 +82,24 @@ def handle_disconnection(disconnected_socket):
         client.send(leave_message_header + leave_message)
 
 
+def show_active_users(sender_socket):
+    
+    for client_socket in clients:
+        if client_socket != sender_socket:
+            username_header = clients[client_socket]['header']
+            username = clients[client_socket]['data']
+            sender_socket.send(username_header + username)
+
 # broadcast sent message
 def broadcast_message_to_users(sender_socket, message):
     user = clients[sender_socket]
 
     username = user['data'].decode('utf-8')
     message_data = message['data'].decode('utf-8')
+
+    if message_data == '!who':
+        show_active_users(sender_socket)
+        return
 
     print(f'Received message from {username}: {message_data}')
 
@@ -111,7 +123,7 @@ while True:
             if user is False: 
                 continue
 
-            handle_new_connection(client_socket, client_address)
+            handle_new_connection(client_socket, client_address,user)
         # standard message
         else:
             message = receive_message(notified_socket)
