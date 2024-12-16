@@ -7,7 +7,7 @@
 3. [Architecture](#architecture)
 
 ## Introduction
-This is a chatroom application consisting of a server and client written in Python. Key features:
+This is a console chatroom application consisting of a server and client written in Python. Key features:
 - Broadcast messages
 - Features like private messaging and listing of active users
 - User login and logout
