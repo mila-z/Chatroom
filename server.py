@@ -95,16 +95,25 @@ def show_active_users(sender_socket):
             sender_socket.send(message_header + message)
 
 def send_private_message(sender_user, receiver_user, message):
-    receiver_user = receiver_user.encode('utf-8')
+    sender_user_encoded = sender_user.encode('utf-8')
+    receiver_user_encoded = receiver_user.encode('utf-8')
+    found = False
     for client_socket in clients:
-        print(clients[client_socket]['data'])
-        print(receiver_user)
-        if clients[client_socket]['data'] == receiver_user:
+        if clients[client_socket]['data'] == receiver_user_encoded:
             private_message = f'privately {sender_user} > {message}'
             private_message_header = generate_header(private_message)
             private_message = private_message.encode('utf-8')
-            print('fount it now sending')
             client_socket.send(private_message_header + private_message) 
+            found = True
+        
+        if clients[client_socket]['data'] == sender_user_encoded:
+            sender_socket = client_socket
+    
+    if not found:
+        message = f'{receiver_user} is not online'
+        message_header = generate_header(message)
+        message = message.encode('utf-8')
+        sender_socket.send(message_header + message)
 
 # broadcast sent message
 def broadcast_message_to_users(sender_socket, message):
