@@ -59,7 +59,6 @@ Examples for commands:
 
 `!msg <user> <message>`:
 <br>![alt text](screenshots/image-5.png)
-
 <br>![ alt text](screenshots/image-4.png)
 
 
@@ -88,15 +87,15 @@ The script:
 
 Examples:
 Benchmark for 10 users and 5 messages per user:
-![alt text](screenshots/image-3.png)
+<br>![alt text](screenshots/image-3.png)
 
 
 Benchmark for 50 users and 10 messages per user:
-![alt text](screenshots/image-1.png)
+<br>![alt text](screenshots/image-1.png)
 
 
 Benchmark for 60 users and 25 messages per user:
-![alt text](screenshots/image-2.png)
+<br>![alt text](screenshots/image-2.png)
 
 
 Tools used:
