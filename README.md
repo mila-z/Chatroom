@@ -82,7 +82,8 @@ Tools used:
 
 The script:
 - Runs multiple threads, where each thread is a client that connects to the server, sends a series of messages and waits for responses.
-- Records the time before sending and after receiving messages and calculates how long it took for a client to interact with the server. These metrics are stored in a dictionary (results), with each client's time or error message logged. - Calculates the average response time accross all successful clients.   
+- Records the time before sending and after receiving messages and calculates how long it took for a client to interact with the server. These metrics are stored in a dictionary (results), with each client's time or error message logged. 
+- Calculates the average response time accross all successful clients.   
 
 Examples:
 <br>Benchmark for 10 users and 5 messages per user:
