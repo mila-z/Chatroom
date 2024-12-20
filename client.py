@@ -90,4 +90,3 @@ termination_flag.set()
 receive_thread.join()
 
 
-print('Client program exited')
