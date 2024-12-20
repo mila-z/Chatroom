@@ -89,6 +89,10 @@ def show_active_users(sender_socket):
             message = ('->' + clients[client_socket]['data'].decode('utf-8')).encode('utf-8')
             message_header = generate_header(message)
             sender_socket.send(message_header + message)
+        elif len(clients) == 1 and client_socket == sender_socket:
+            message = ('no one but you is active').encode('utf-8')
+            message_header = generate_header(message)
+            sender_socket.send(message_header + message)
 
 def send_private_message(sender_user, receiver_user, message):
     receiver_user = receiver_user.encode('utf-8')
