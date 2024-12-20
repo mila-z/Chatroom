@@ -20,7 +20,7 @@ This is a console chatroom application consisting of a server and client written
 ## How to Run the Application
 
 ### Prerequisites
-Ensure Python 3.x is installed on your system. No additional libraries needed.
+Ensure Python 3.x is installed on your system. 
 
 ### Installation
 1. Clone/Download this Repoditory
