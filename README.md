@@ -1,16 +1,21 @@
 # Chatroom Application - Network Programming Project @ FMI 2024
 
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
 2. [How to Run the Application](#how-to-run-the-application)
 3. [Architecture](#architecture)
 
+
+
 ## Introduction
 This is a console chatroom application consisting of a server and client written in Python. Key features:
 - Broadcast messages
 - Features like private messaging and listing of active users
 - User login and logout
+
+
 
 ## How to Run the Application
 
@@ -41,6 +46,8 @@ Ensure Python 3.x is installed on your system. No additional libraries needed.
 `python benchmark.py`
 7. Exit the Virtual Emvironment
 
+
+
 ## Architecture
 
 ### Server (server.py)
@@ -68,6 +75,7 @@ Design Choice:
 Tools used:
 - The socket and select libraries.
 
+
 ### Client (client.py)
 The client enables users to:
 - Send and receive messages in real-time.
@@ -78,6 +86,7 @@ Design Choice:
 
 Tools used:
 - The socket, threading, and errno libraries.
+
 
 ### Benchmarking the time for multiple clients interacting with the server (benchmark.py)
 
