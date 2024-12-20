@@ -32,11 +32,14 @@ Ensure Python 3.x is installed on your system. No additional libraries needed.
 Open a terminal, navigate to the project directory and start the server
 `python server.py`
 4. Run the Client 
-Open a separate terminal (or multiple terminals to simulate multiple users). Ensure the virtual environment is activated and start the client
+Open a separate terminal (or multiple terminals to simulate multiple users), navigate to the project directory and start the client
 `python client.py` 
 5. Join the Chatroom
 Enter a username when prompted in the client and start sending messages
-6. Exit the Virtual Emvironment
+6. Run the benchmark
+Open a terminal, navigate to the project directory and start the benchmark
+`python benchmark.py`
+7. Exit the Virtual Emvironment
 
 ## Architecture
 
@@ -49,8 +52,17 @@ The server is responsible for:
     `!msg` - enables private messaging;
     `!logout` - handles user disconnections.
 
+Examples for commands:
+`!who`:
+![alt text](screenshots/image.png)
+
+`!msg <user> <message>`:
+![alt text](screenshots/image-5.png)
+![alt text](screenshots/image-4.png)
+
+
 Design Choice:
-The server uses the select module to monitor multiple client sockets simultaneously, allowing for new connections, incoming messages, and disconnections, without blocking or requiring additional threads for each connection.
+The server listens on a specified IP and port. It accepts new connections and mainains a list of active sockets and associated client data. It handles new connections by registering the client and notifying other of their arrival. The disconnections are handles by removing the user from the active list and notifying the remaining clients. Iuses the select module to handle multiple client sockets simultaneously, allowing for more efficient management of multiple connections.
 
 Tools used:
 - The socket and select libraries.
@@ -58,11 +70,29 @@ Tools used:
 ### Client (client.py)
 The client enables users to:
 - Send and receive messages in real-time.
-- Execute chatroom commands.
 - Log out cleanly.
 
 Design Choice:
-The client uses multithreading to handle sending and receiving messages concurrently, ensuring real-time communication without blocking the user interface.
+The client connects to the server using a socket with a specified IP address and port. When a connection has been established it prompts the user to enter a username. It uses multithreading to handle sending and receiving messages concurrently, ensuring real-time communication without blocking the user interface.
 
 Tools used:
 - The socket, threading, and errno libraries.
+
+### Benchmarking the time for multiple clients interacting with the server (benchmark.py)
+
+The script:
+- Runs multiple threads, where each thread is a client that connects to the server, sends a series of messages and waits for responses.
+- Records the time before sending and after receiving messages and calculates how long it took for a client to interact with the server. These metrics are stored in a dictionary (results), with each client's time or error message logged. - Calculates the average response time accross all successful clients.   
+
+Examples:
+Benchmark for 10 users and 5 messages per user:
+![alt text](screenshots/image-3.png)
+
+Benchmark for 50 users and 10 messages per user:
+![alt text](screenshots/image-1.png)
+
+Benchmark for 60 users and 25 messages per user:
+![alt text](screenshots/image-2.png)
+
+Tools used:
+The socket, threading and time libraries.
