@@ -56,18 +56,8 @@ The server is responsible for:
 - Broadcasting messages to all users.
 - Supporting commands like:
     - `!who` - list active users;
-    - `!msg` - enables private messaging;
+    - `!msg <user> <message>` - enables private messaging;
     - `!logout` - handles user disconnections.
-
-Examples for commands:
-`!who`:
-<br>![alt text](screenshots/image.png)
-
-
-`!msg <user> <message>`:
-<br>![alt text](screenshots/image-5.png)
-<br>![ alt text](screenshots/image-4.png)
-
 
 Design Choice:
 <br>The server listens on a specified IP and port. It accepts new connections and mainains a list of active sockets and associated client data. It handles new connections by registering the client and notifying other of their arrival. The disconnections are handles by removing the user from the active list and notifying the remaining clients. Iuses the select module to handle multiple client sockets simultaneously, allowing for more efficient management of multiple connections.
