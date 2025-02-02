@@ -75,7 +75,7 @@ class ChatServer:
     def show_active_users(self, sender_socket):
         """Show active users."""
         if len(self.clients) == 1 and sender_socket in self.clients:
-            message = ('no one but you is active').encode('utf-8')
+            message = ('No one but you is active').encode('utf-8')
         else:
             message = '\n'.join(f'-> {self.clients[c]['data'].decode('utf-8')}' for c in self.clients if c != sender_socket).encode('utf-8')
         message_header = generate_header(message)

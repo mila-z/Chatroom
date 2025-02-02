@@ -1,4 +1,4 @@
-# Chatroom Application - Network Programming Project @ FMI 2024
+# Chatroom Application - Network Programming Course and Programming with Python Course Project @ FMI 2024
 
 
 ## Table of Contents
